@@ -1,0 +1,24 @@
+name: 'complex-cache'
+description: "complex cache"
+author: 'lchenay'
+branding:
+  icon: 'anchor'
+  color: 'blue'
+
+inputs:
+  dir:
+    description: 'Directory where to find build cache'
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/cache@v2
+      name: "Cache"
+      with:
+        path: ${{ inputs.dir }}
+        key: complex-cache
+
+    - name: Complex stuff
+      shell: bash
+      run: echo "doing a lot of complex stuff"

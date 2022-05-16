@@ -1,0 +1,25 @@
+name: Pull request
+
+on: 
+  push:
+    branches:
+      - main
+      
+jobs:
+  test:
+    if: github.event.pull_request.draft == false
+    runs-on: macos-12
+    timeout-minutes: 60
+    steps:
+      - name: Git - Checkout
+        uses: actions/checkout@v2.4.0
+        with:
+          ref: ${{ github.ref }}
+
+      - uses: ./.github/actions/prepare
+        name: "Prepare"
+
+      - name: Build and test
+        run: echo "Tests" ; mkdir build
+
+      
